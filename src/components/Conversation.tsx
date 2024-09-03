@@ -77,10 +77,15 @@ export default function Conversation({
     }
   }, [messages.length]);
 
+  const hasContent = messages.length || messageStream;
+
   return (
     <main className="flex grow flex-col items-center justify-between p-12 pt-6 space-y-4 overflow-hidden">
-      {(messages.length || messageStream) && (
-        <div className="grow w-full overflow-auto pr-1" ref={scrollRef}>
+      {hasContent && (
+        <div
+          className="grow self-stretch overflow-auto pr-4 -mr-4"
+          ref={scrollRef}
+        >
           {messages.map(({ message, type }, i) => (
             <Message message={message} type={type} key={`${i}_${message}`} />
           ))}
@@ -89,10 +94,16 @@ export default function Conversation({
           )}
         </div>
       )}
+      {!hasContent && (
+        <div className="grow flex flex-col justify-center text-xl">
+          Write something to the bot to start a conversation
+        </div>
+      )}
       <div className="w-full">
         <form onSubmit={submit} className="flex flex-row space-x-4">
           <input
             className="grow retro input bg-gray-100 disabled:bg-gray-200"
+            placeholder="Enter a message"
             onInput={(e) => setInput(e.currentTarget.value)}
             value={input}
             disabled={inputDisabled}

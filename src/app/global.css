@@ -3,64 +3,79 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 42, 183, 202;
+    --foreground-rgb: 0, 0, 0;
+    --background-rgb: 42, 183, 202;
 
-  --mustard-rgb: 254, 215, 102;
-  --mustard-dark-rgb: 223, 168, 1;
-  --tomato-rgb: 254, 74, 73;
-  --tomato-dark-rgb: 162, 1, 1;
+    --mustard-rgb: 254, 215, 102;
+    --mustard-dark-rgb: 223, 168, 1;
+    --tomato-rgb: 254, 74, 73;
+    --tomato-dark-rgb: 162, 1, 1;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-rgb: 0, 0, 0;
+    }
 }
 
 h1, h2, h3, h4, h5 {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+    color: rgb(var(--foreground-rgb));
+    background: rgb(var(--background-rgb));
+}
+
+header {
+    text-shadow: 1px 1px rgb(var(--tomato-dark-rgb)),
+        -1px -1px rgb(var(--tomato-dark-rgb)),
+        1px -1px rgb(var(--tomato-dark-rgb)),
+        -1px 1px rgb(var(--tomato-dark-rgb)),
+        3px 3px rgb(var(--tomato-rgb)),
+        5px 5px rgb(var(--mustard-rgb));
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .bg-mustard {
-    background-color: rgb(var(--mustard-rgb));
-  }
-  .bg-tomato {
-    background-color: rgb(var(--tomato-rgb));
-  }
-  .color-mustard {
-    color: rgb(var(--mustard-rgb));
-  }
-  .color-tomato {
-    color: rgb(var(--tomato-rgb));
-  }
-
-  .retro {
-    border: 1px solid #000;
-    border-radius: 0;
-    box-shadow: 3px 3px 0 #000;
-
-    &.border-mustard {
-      border-color: rgb(var(--mustard-dark-rgb));
-      box-shadow: 3px 3px 0 rgb(var(--mustard-rgb));
+    .text-balance {
+        text-wrap: balance;
     }
-    &.border-tomato {
-      border-color: rgb(var(--tomato-dark-rgb));
-      box-shadow: 3px 3px 0 rgb(var(--tomato-rgb));
+
+    .bg-mustard {
+        background-color: rgb(var(--mustard-rgb));
     }
-  }
-  .input {
-    padding: 0.5rem 1rem
-  }
+
+    .bg-tomato {
+        background-color: rgb(var(--tomato-rgb));
+    }
+
+    .color-mustard {
+        color: rgb(var(--mustard-rgb));
+    }
+
+    .color-tomato {
+        color: rgb(var(--tomato-rgb));
+    }
+
+    .retro {
+        border: 1px solid #000;
+        border-radius: 0;
+        box-shadow: 3px 3px 0 #000;
+
+        &.border-mustard {
+            border-color: rgb(var(--mustard-dark-rgb));
+            box-shadow: 3px 3px 0 rgb(var(--mustard-rgb));
+        }
+
+        &.border-tomato {
+            border-color: rgb(var(--tomato-dark-rgb));
+            box-shadow: 3px 3px 0 rgb(var(--tomato-rgb));
+        }
+    }
+
+    .input {
+        padding: 0.5rem 1rem
+    }
 }

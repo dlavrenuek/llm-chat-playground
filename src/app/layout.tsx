@@ -18,8 +18,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex flex-col h-screen">
-          <header className="p-12 pb-6 font-bold text-xl">
-            Simple LLM chat playground
+          <header className="p-12 pb-6 font-bold text-xl text-white">
+            🕹 Langchain + LLM chat playground
           </header>
           {children}
         </div>
