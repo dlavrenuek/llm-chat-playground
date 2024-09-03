@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     await store.add({ message, type: "user" }, sessionId);
 
     const messages = [
-      new SystemMessage("You are a helpful but very rude assistant"),
+      new SystemMessage("You are a helpful but sarcastic assistant"),
       ...(await store.get(sessionId))
         .map(({ message, type }) => {
           switch (type) {
