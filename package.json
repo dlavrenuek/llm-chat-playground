@@ -10,6 +10,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@langchain/core": "^0.2.31",
     "@langchain/ollama": "^0.0.4",
     "ai": "^3.3.16",
     "langchain": "^0.2.16",
