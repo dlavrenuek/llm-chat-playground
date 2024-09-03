@@ -1,7 +1,7 @@
 {
-  "name": "langchain-next",
-  "version": "0.1.0",
-  "private": true,
+  "name": "llm-chat-playground",
+  "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
