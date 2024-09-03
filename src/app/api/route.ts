@@ -29,7 +29,10 @@ export async function POST(req: Request) {
     await store.add({ message, type: "user" }, sessionId);
 
     const messages = [
-      new SystemMessage("You are a helpful but sarcastic assistant"),
+      new SystemMessage(
+        process.env.SYSTEM_MESSAGE ??
+          "You are a professional assistant that brags about how great your conversation partner is",
+      ),
       ...(await store.get(sessionId))
         .map(({ message, type }) => {
           switch (type) {

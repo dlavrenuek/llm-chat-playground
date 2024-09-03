@@ -26,3 +26,13 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
+## Configuring the Playground
+
+The playground can be customized via environment variables, with default settings defined in the [`.env`](.env) file.
+To configure the playground for a local development environment, simply copy the contents of `.env` to a new file named
+`.env.local`, and update the values as needed. This file is excluded from version control.
+
+| Configuration variable | Description                                         | Default value                             |
+|------------------------|-----------------------------------------------------|-------------------------------------------|
+| SYSTEM_MESSAGE         | System message that defines the behaviour of the AI | You are a helpful but sarcastic assistant |
+
