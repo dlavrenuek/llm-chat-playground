@@ -12,10 +12,12 @@ export default function Conversation({
   initialMessages = [],
 }: ConversationProps) {
   const [input, setInput] = useState("");
-  const [inputDisabled, setInputDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState(initialMessages);
   const [messageStream, setMessageStream] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const lockScrollRef = useRef<boolean>(true);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const addMessage = ({ message, type }: ChatMessage) => {
     setMessages((currentMessages) => [...currentMessages, { message, type }]);
@@ -30,7 +32,7 @@ export default function Conversation({
     e.preventDefault();
     setInput("");
     addMessage({ message: input, type: "user" });
-    setInputDisabled(true);
+    setLoading(true);
     let _messageStream = "";
 
     try {
@@ -58,24 +60,26 @@ export default function Conversation({
       console.log("An error occurred", e);
     }
     commitMessageStream(_messageStream);
-    setInputDisabled(false);
+    setLoading(false);
+  };
+
+  const checkScrollLock = () => {
+    if (scrollRef.current) {
+      lockScrollRef.current =
+        scrollRef.current.scrollHeight - scrollRef.current.scrollTop ===
+        scrollRef.current.offsetHeight;
+    }
   };
 
   useEffect(() => {
-    if (scrollRef.current) {
-      const { scrollTop, scrollHeight, offsetHeight } = scrollRef.current;
-      // allow breaking out of scroll lock while streaming
-      if (scrollHeight - scrollTop <= offsetHeight + 110) {
-        scrollRef.current.scrollTop = scrollHeight;
-      }
-    }
-  }, [messageStream]);
-
-  useEffect(() => {
-    if (scrollRef.current) {
+    if (scrollRef.current && lockScrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages.length]);
+  }, [messageStream, messages.length]);
+
+  useEffect(() => {
+    !loading && inputRef.current?.focus();
+  }, [loading]);
 
   const hasContent = messages.length || messageStream;
 
@@ -85,6 +89,7 @@ export default function Conversation({
         <div
           className="grow self-stretch overflow-auto pr-4 -mr-4"
           ref={scrollRef}
+          onScroll={checkScrollLock}
         >
           {messages.map(({ message, type }, i) => (
             <Message message={message} type={type} key={`${i}_${message}`} />
@@ -106,11 +111,13 @@ export default function Conversation({
             placeholder="Enter a message"
             onInput={(e) => setInput(e.currentTarget.value)}
             value={input}
-            disabled={inputDisabled}
+            ref={inputRef}
+            disabled={loading}
+            autoFocus
           />
           <button
             type="submit"
-            disabled={inputDisabled}
+            disabled={loading}
             className="retro input bg-gray-200 disabled:bg-gray-400"
           >
             Send
