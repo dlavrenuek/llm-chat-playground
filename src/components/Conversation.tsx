@@ -94,8 +94,8 @@ export default function Conversation({
           {messages.map(({ message, type }, i) => (
             <Message message={message} type={type} key={`${i}_${message}`} />
           ))}
-          {messageStream && (
-            <Message message={messageStream} type="assistant" />
+          {loading && (
+            <Message message={messageStream} type="assistant" loading />
           )}
         </div>
       )}
