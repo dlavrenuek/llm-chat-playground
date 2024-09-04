@@ -15,11 +15,16 @@ To run this project you need
 
 ## Run locally
 
-This playground currently only supports a locally running Ollama server with llama3.1. To start the model run:
+This playground supports a locally running Ollama server and the HuggingFace Inference API. Per default the chat will use
+Ollama with llama3.1 model. If it is the first time you are using the configured model, Ollama will download it when
+you send the first message in the conversation UI without any visible progress. You should pull the model first:
 
 ```bash
-ollama run llama3.1
+ollama pull llama3.1
 ```
+
+You can also run a model deployed on [Hugging Face](https://huggingface.co/) by configuring an
+[access token](https://huggingface.co/docs/hub/security-tokens), see [configuration options](#configuring-the-playground)
 
 To start the application in development mode run:
 
@@ -39,4 +44,7 @@ To configure the playground for a local development environment, simply copy the
 | Configuration variable | Description                                         | Default value                             |
 |------------------------|-----------------------------------------------------|-------------------------------------------|
 | SYSTEM_MESSAGE         | System message that defines the behaviour of the AI | You are a helpful but sarcastic assistant |
+| OLLAMA_MODEL           | The model used by local Ollama server               | llama3.1                                  |
+| HUGGINGFACEHUB_MODEL   | Hugging Face model                                  | microsoft/Phi-3-mini-4k-instruct          |
+| HUGGINGFACEHUB_API_KEY | Hugging Face access token                           |                                           |
 
