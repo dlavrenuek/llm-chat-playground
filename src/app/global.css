@@ -38,6 +38,11 @@ header {
         5px 5px rgb(var(--mustard-rgb));
 }
 
+pre {
+    max-width: 100%;
+    overflow: auto;
+}
+
 @layer utilities {
     .text-balance {
         text-wrap: balance;

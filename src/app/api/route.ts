@@ -1,7 +1,3 @@
-"use server";
-
-import { ChatOllama } from "@langchain/ollama";
-import { StringOutputParser } from "@langchain/core/output_parsers";
 import {
   AIMessage,
   HumanMessage,
@@ -9,17 +5,10 @@ import {
 } from "@langchain/core/messages";
 import { createSession, getSessionId } from "@/utility/session";
 import conversationStore from "@/utility/conversationStore";
+import { getAi } from "@/utility/ai";
 
+const ai = getAi();
 const store = await conversationStore();
-
-const model = new ChatOllama({
-  model: "llama3.1",
-  temperature: 0,
-});
-
-const parser = new StringOutputParser();
-
-const chain = model.pipe(parser);
 
 export async function POST(req: Request) {
   const { message } = await req.json();
@@ -46,7 +35,7 @@ export async function POST(req: Request) {
         .filter((v) => v !== null),
     ];
 
-    const stream = await chain.stream(messages);
+    const stream = await ai.stream(messages);
     let fullResponse = "";
 
     const responseStream = new ReadableStream({

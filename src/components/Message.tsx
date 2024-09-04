@@ -1,4 +1,6 @@
 import { ChatMessage } from "@/utility/conversationStore";
+import Markdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 type MessageProps = ChatMessage & {
   loading?: boolean;
@@ -14,7 +16,7 @@ export default function Message({
       className={`flex flex-row mb-4 ${type === "user" ? "justify-end" : "justify-start"}`}
     >
       <div
-        className={`lg:max-w-screen-md bg-gray-50 p-4 retro ${type === "user" ? "border-tomato" : "border-mustard"}`}
+        className={`lg:max-w-screen-md max-w-full bg-gray-50 p-4 retro ${type === "user" ? "border-tomato" : "border-mustard"}`}
       >
         <h3 className={`${type === "user" ? "text-right" : "text-left"}`}>
           {type === "user" ? "You" : "Assistant"}
@@ -22,7 +24,26 @@ export default function Message({
             <span className="animate-spin inline-block ml-2">🥐</span>
           )}
         </h3>
-        <div>{message}</div>
+        <div>
+          <Markdown
+            components={{
+              code({ children, className, node, ...rest }) {
+                const match = /language-(\w+)/.exec(className || "");
+                return match ? (
+                  <SyntaxHighlighter language={match[1]}>
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code {...rest} className={className}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          >
+            {message}
+          </Markdown>
+        </div>
       </div>
     </div>
   );
