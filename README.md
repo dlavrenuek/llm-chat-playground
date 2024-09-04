@@ -1,4 +1,8 @@
-This is a playground UI for Large Language Modals (LLMs). It utilizes:
+Tired with the default GPTs chats? This one has sarcasm per default!
+
+<img src="docs/preview.gif" width="489" alt="preview">
+
+This project is a playground UI for Large Language Modals (LLMs). It utilizes:
 - [LangChain.js](https://github.com/langchain-ai/langchainjs) for model call abstraction and Retrieval-Augmented Generation (RAG)
 - [React](https://github.com/facebook/react) and [Next.js](https://github.com/vercel/next.js) for UI and server
 
