@@ -1,4 +1,4 @@
-import { ChatMessage } from "@/utility/conversationStore";
+import { ChatMessage } from "@/utility/store";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 

@@ -2,7 +2,7 @@
 
 import Message from "@/components/Message";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { ChatMessage } from "@/utility/conversationStore";
+import { ChatMessage } from "@/utility/store";
 
 type ConversationProps = {
   initialMessages?: ChatMessage[];
