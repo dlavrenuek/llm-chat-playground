@@ -101,7 +101,7 @@ export default function Conversation({
       )}
       {!hasContent && (
         <div className="grow flex flex-col justify-center text-xl">
-          Write something to the bot to start a conversation
+          👇 Write something to the bot to start a conversation
         </div>
       )}
       <div className="w-full">
