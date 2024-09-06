@@ -6,10 +6,3 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: superduper
       MONGO_INITDB_ROOT_PASSWORD: SuperDuper12345HollaMollaLaaaaa
-  chat:
-    build:
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      DB_URL: mongodb://superduper:SuperDuper12345HollaMollaLaaaaa@localhost:27017

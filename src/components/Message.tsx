@@ -9,6 +9,7 @@ type MessageProps = ChatMessage & {
 export default function Message({
   message,
   type,
+  date,
   loading = false,
 }: MessageProps) {
   return (
@@ -18,7 +19,10 @@ export default function Message({
       <div
         className={`lg:max-w-screen-md max-w-full bg-gray-50 p-4 retro ${type === "user" ? "border-tomato" : "border-mustard"}`}
       >
-        <h3 className={`${type === "user" ? "text-right" : "text-left"}`}>
+        <h3
+          className={`${type === "user" ? "text-right" : "text-left"}`}
+          title={date.toISOString()}
+        >
           {type === "user" ? "You" : "Assistant"}
           {loading && (
             <span className="animate-spin inline-block ml-2">🥐</span>

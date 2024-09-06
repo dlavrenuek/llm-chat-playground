@@ -8,10 +8,10 @@ import { getStore } from "@/utility/store";
 import { getAi } from "@/utility/ai";
 
 const ai = getAi();
-const store = await getStore();
 
 export async function POST(req: Request) {
   const { message } = await req.json();
+  const store = await getStore();
 
   if (message) {
     const conversationId =
@@ -63,5 +63,5 @@ export async function POST(req: Request) {
     return new Response(responseStream);
   }
 
-  return "error?";
+  throw new Error("Message must not be empty");
 }

@@ -2,9 +2,8 @@ import Conversation from "@/components/Conversation";
 import { getStore } from "@/utility/store";
 import { getConversationId } from "@/utility/conversations";
 
-const store = await getStore();
-
 export default async function Home() {
+  const store = await getStore();
   const conversationId = await getConversationId();
   const initialMessages = conversationId ? await store.get(conversationId) : [];
 
