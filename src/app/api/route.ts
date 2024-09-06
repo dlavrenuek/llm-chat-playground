@@ -3,26 +3,30 @@ import {
   HumanMessage,
   SystemMessage,
 } from "@langchain/core/messages";
-import { createSession, getSessionId } from "@/utility/session";
-import conversationStore from "@/utility/conversationStore";
+import { createConversation, getConversationId } from "@/utility/conversations";
+import { getStore } from "@/utility/store";
 import { getAi } from "@/utility/ai";
 
 const ai = getAi();
-const store = await conversationStore();
 
 export async function POST(req: Request) {
   const { message } = await req.json();
+  const store = await getStore();
 
   if (message) {
-    const sessionId = (await getSessionId()) ?? (await createSession());
-    await store.add({ message, type: "user" }, sessionId);
+    const conversationId =
+      (await getConversationId()) ?? (await createConversation());
+    await store.add(
+      { message, type: "user", date: new Date() },
+      conversationId,
+    );
 
     const messages = [
       new SystemMessage(
         process.env.SYSTEM_MESSAGE ??
           "You are a professional assistant that brags about how great your conversation partner is",
       ),
-      ...(await store.get(sessionId))
+      ...(await store.get(conversationId))
         .map(({ message, type }) => {
           switch (type) {
             case "user":
@@ -36,6 +40,7 @@ export async function POST(req: Request) {
     ];
 
     const stream = await ai.stream(messages);
+    const date = new Date();
     let fullResponse = "";
 
     const responseStream = new ReadableStream({
@@ -45,8 +50,8 @@ export async function POST(req: Request) {
         if (done) {
           controller.close();
           await store.add(
-            { message: fullResponse, type: "assistant" },
-            sessionId,
+            { message: fullResponse, type: "assistant", date },
+            conversationId,
           );
         } else {
           fullResponse += value;
@@ -58,5 +63,5 @@ export async function POST(req: Request) {
     return new Response(responseStream);
   }
 
-  return "error?";
+  throw new Error("Message must not be empty");
 }

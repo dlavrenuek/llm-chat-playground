@@ -41,11 +41,12 @@ The playground can be customized via environment variables, with default setting
 To configure the playground for a local development environment, simply copy the contents of `.env` to a new file named
 `.env.local`, and update the values as needed. This file is excluded from version control.
 
-| Configuration variable      | Description                                         | Default value                             |
-|-----------------------------|-----------------------------------------------------|-------------------------------------------|
-| SYSTEM_MESSAGE              | System message that defines the behaviour of the AI | You are a helpful but sarcastic assistant |
-| OLLAMA_MODEL                | The model used by local Ollama server               | llama3.1                                  |
-| HUGGINGFACEHUB_MODEL        | Hugging Face model                                  | microsoft/Phi-3-mini-4k-instruct          |
-| HUGGINGFACEHUB_API_KEY      | Hugging Face access token                           |                                           |
-| HUGGINGFACEHUB_ENDPOINT_URL | Hugging Face inference endpoint url                 |                                           |
+| Configuration variable      | Description                                                                                                                      | Default value                             |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| SYSTEM_MESSAGE              | System message that defines the behaviour of the AI                                                                              | You are a helpful but sarcastic assistant |
+| OLLAMA_MODEL                | The model used by local Ollama server                                                                                            | llama3.1                                  |
+| HUGGINGFACEHUB_MODEL        | Hugging Face model                                                                                                               | microsoft/Phi-3-mini-4k-instruct          |
+| HUGGINGFACEHUB_API_KEY      | Hugging Face access token                                                                                                        |                                           |
+| HUGGINGFACEHUB_ENDPOINT_URL | Hugging Face inference endpoint url                                                                                              |                                           |
+| DB_URL                      | Database to use. Supported configuration are:<br/>- leve empty for local in memory storage<br/>- `mongodb://xxx/xxx` for Mongodb |                                           |
 

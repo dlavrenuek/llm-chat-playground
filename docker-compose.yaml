@@ -1,0 +1,8 @@
+services:
+  mongodb:
+    image: mongo:8.0.0-rc19
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: superduper
+      MONGO_INITDB_ROOT_PASSWORD: SuperDuper12345HollaMollaLaaaaa

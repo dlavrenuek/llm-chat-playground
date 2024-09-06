@@ -1,12 +1,11 @@
 import Conversation from "@/components/Conversation";
-import conversationStore from "@/utility/conversationStore";
-import { getSessionId } from "@/utility/session";
-
-const store = await conversationStore();
+import { getStore } from "@/utility/store";
+import { getConversationId } from "@/utility/conversations";
 
 export default async function Home() {
-  const sessionId = await getSessionId();
-  const initialMessages = sessionId ? await store.get(sessionId) : [];
+  const store = await getStore();
+  const conversationId = await getConversationId();
+  const initialMessages = conversationId ? await store.get(conversationId) : [];
 
   return <Conversation initialMessages={initialMessages} />;
 }

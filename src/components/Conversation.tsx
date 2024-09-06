@@ -2,7 +2,7 @@
 
 import Message from "@/components/Message";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { ChatMessage } from "@/utility/conversationStore";
+import { ChatMessage } from "@/utility/store";
 
 type ConversationProps = {
   initialMessages?: ChatMessage[];
@@ -19,19 +19,19 @@ export default function Conversation({
   const lockScrollRef = useRef<boolean>(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const addMessage = ({ message, type }: ChatMessage) => {
-    setMessages((currentMessages) => [...currentMessages, { message, type }]);
+  const addMessage = (message: ChatMessage) => {
+    setMessages((currentMessages) => [...currentMessages, message]);
   };
 
   const commitMessageStream = (message: string) => {
     setMessageStream("");
-    addMessage({ message, type: "assistant" });
+    addMessage({ message, type: "assistant", date: new Date() });
   };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setInput("");
-    addMessage({ message: input, type: "user" });
+    addMessage({ message: input, type: "user", date: new Date() });
     setLoading(true);
     let _messageStream = "";
 
@@ -91,11 +91,16 @@ export default function Conversation({
           ref={scrollRef}
           onScroll={checkScrollLock}
         >
-          {messages.map(({ message, type }, i) => (
-            <Message message={message} type={type} key={`${i}_${message}`} />
+          {messages.map((message, i) => (
+            <Message {...message} key={`${i}_${message}`} />
           ))}
           {loading && (
-            <Message message={messageStream} type="assistant" loading />
+            <Message
+              message={messageStream}
+              type="assistant"
+              date={new Date()}
+              loading
+            />
           )}
         </div>
       )}
