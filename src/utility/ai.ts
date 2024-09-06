@@ -7,6 +7,7 @@ function getModel() {
     return new HuggingFaceInference({
       model: process.env.HUGGINGFACEHUB_MODEL,
       apiKey: process.env.HUGGINGFACEHUB_API_KEY,
+      endpointUrl: process.env.HUGGINGFACEHUB_ENDPOINT_URL,
     });
   }
 
