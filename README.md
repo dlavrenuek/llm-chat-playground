@@ -1,4 +1,4 @@
-Tired with the default GPTs chats? This one has sarcasm per default!
+Tired of the regular GPT chats? This one has sarcasm per default!
 
 <img src="docs/preview.gif" width="489" alt="preview">
 
