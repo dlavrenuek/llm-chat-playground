@@ -13,12 +13,9 @@ function getModel() {
 
   return new ChatOllama({
     model: process.env.OLLAMA_MODEL,
-    temperature: 0,
   });
 }
 
 export function getAi() {
-  const model = getModel();
-  const parser = new StringOutputParser();
-  return model.pipe(parser);
+  return getModel().pipe(new StringOutputParser());
 }

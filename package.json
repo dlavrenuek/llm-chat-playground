@@ -36,7 +36,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=20",
-    "pnpm": ">=9"
+    "node": ">=20"
   }
 }

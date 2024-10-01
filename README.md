@@ -10,8 +10,10 @@ This project is a playground UI for Large Language Modals (LLMs). It utilizes:
 
 To run this project you need
 - [Node.js®](https://nodejs.org/en/download/package-manager) v20+
-- [pnpm](https://pnpm.io/installation) 9+
 - [Ollama](https://ollama.com/download)
+
+Recommended (if you want to contribute)
+- [pnpm](https://pnpm.io/installation) 9+
 
 ## Run locally
 
@@ -31,6 +33,20 @@ To start the application in development mode run:
 ```bash
 pnpm install
 pnpm dev
+```
+
+With NPM
+
+```bash
+npm install
+npm dev
+```
+
+With Yarn
+
+```bash
+yarn install
+yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
